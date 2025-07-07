@@ -194,6 +194,12 @@ vim.keymap.set('n', '<leader>gs', ':Git<cr>', { desc = '[G]it [S]ummary' })
 vim.keymap.set('n', '<leader>ds', ':Gdiffsplit<cr>', { desc = 'Git [D]iff [S]plit' })
 vim.keymap.set('n', '<leader>gh', ':0Gclog<cr>', { desc = '[G]it [H]istory' })
 
+-- Vim Diff Keymaps
+-- Choose the left side modifications
+vim.keymap.set('n', 'gh', '<cmd>diffget //2<cr>', { desc = '[gh] Choose the left side modifications' })
+-- Choose the right side modifications
+vim.keymap.set('n', 'gl', '<cmd>diffget //3<cr>', { desc = '[gl] Choose the right side modifications' })
+
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
