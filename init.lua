@@ -180,7 +180,7 @@ vim.keymap.set('n', 'n', 'nzzzv')
 vim.keymap.set('n', 'N', 'Nzzzv')
 
 -- set leader + w to write buffers
-vim.keymap.set('n', '<leader>w', ':w<cr>', { desc = 'Quick [W]rite' })
+-- vim.keymap.set('n', '<leader>w', ':w<cr>', { desc = 'Quick [W]rite' })
 
 -- set leader + c to copy selected to clipboard
 vim.keymap.set('v', '<leader>c', '"+y', { desc = '[C]opy to clipboard' })
