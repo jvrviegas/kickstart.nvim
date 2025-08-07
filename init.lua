@@ -171,6 +171,10 @@ vim.o.confirm = true
 --  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
+-- Switch between tabs
+vim.keymap.set('n', '<C-m>', ':tabprevious<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-i>', ':tabnext<CR>', { noremap = true, silent = true })
+
 -- center the view according to the cursor when scrolling
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
