@@ -92,6 +92,10 @@ vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
+
+-- Enable 24-bit RGB colors
+vim.opt.termguicolors = true
+
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
 --  For more options, you can see `:help option-list`
@@ -248,6 +252,23 @@ vim.api.nvim_create_autocmd('FileType', {
 vim.api.nvim_create_user_command('OpenInFinder', function()
   vim.cmd '!open ..'
 end, {})
+
+-- Command to clear Lazy cache and reload Hollow Knight theme
+vim.api.nvim_create_user_command('ReloadHollowKnight', function()
+  -- Clear Lazy cache for the hollow-knight plugin
+  require('lazy.core.cache').clear()
+
+  -- Reload the hollow-knight module
+  package.loaded['hollow-knight'] = nil
+
+  -- Apply the theme again
+  vim.g.hollow_knight_transparent = true
+  vim.g.hollow_knight_background_clear = { 'float_win', 'telescope', 'neo-tree', 'notify', 'noice' }
+  require('hollow-knight').setup()
+  vim.cmd.colorscheme 'hollow-knight'
+
+  print 'Hollow Knight theme reloaded!'
+end, { desc = 'Clear cache and reload Hollow Knight theme' })
 
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
@@ -944,7 +965,28 @@ require('lazy').setup({
         transparent_background = true,
         background_clear = { 'float_win', 'telescope', 'neo-tree', 'notify', 'noice' },
       }
-      vim.cmd.colorscheme 'monokai-pro'
+      -- vim.cmd.colorscheme 'monokai-pro'
+    end,
+  },
+
+  {
+    dir = '~/Projects/Personal/neovim/hollow-knight-nvim',
+    name = 'hollow-knight',
+    priority = 1000,
+    config = function()
+      -- Clear all hollow-knight modules from cache
+      for name, _ in pairs(package.loaded) do
+        if name:match '^hollow%-knight' then
+          package.loaded[name] = nil
+        end
+      end
+
+      require('hollow-knight').setup {
+        transparent = true,
+        background_clear = { 'float_win', 'telescope', 'neo-tree', 'notify', 'noice' },
+      }
+
+      vim.cmd.colorscheme 'hollow-knight'
     end,
   },
 
