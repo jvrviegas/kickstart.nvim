@@ -983,29 +983,39 @@ require('lazy').setup({
 
   {
     dir = '~/Projects/Personal/neovim/the-mandalorian-nvim',
-    name = 'mandalorian',
-    priority = 1000,
+    name = 'the-mandalorian',
+    priority = 1000, -- Load before other plugins
     config = function()
-      -- Clear all mandalorian modules from cache
-      for name, _ in pairs(package.loaded) do
-        if name:match '^mandalorian' then
-          package.loaded[name] = nil
-        end
-      end
-
-      require('mandalorian').setup {
-        variant = 'dark',
+      require('the-mandalorian').setup {
+        -- Enable global transparency
         transparent = true,
-        background_clear = { 'float_win', 'telescope', 'neo-tree', 'notify', 'noice', 'blink-cmp' },
-        italic_comments = true,
-        bold_keywords = false,
-        dim_inactive = true,
+
+        -- Clear backgrounds for specific plugins
+        background_clear = {
+          'telescope', -- Telescope finder
+          'neo-tree', -- File explorer
+          'float_win', -- Floating windows
+          'notify', -- Notification popups
+          'noice', -- Noice command line
+        },
+
+        -- All plugin integrations (all enabled by default)
         plugins = {
-          auto = true,
+          telescope = true, -- Telescope fuzzy finder
+          tree = true, -- NvimTree & Neo-tree file explorers
+          ui = true, -- WhichKey, Bufferline, Alpha dashboard
+          git = true, -- GitSigns integration
+          fugitive = true, -- vim-fugitive Git commands
+          barbecue = true, -- Barbecue.nvim winbar/breadcrumbs
+          avante = true, -- Avante.nvim AI copilot
+          indent = true, -- indent-blankline.nvim
+          rest = true, -- rest.nvim HTTP client
+          terminal = true, -- Terminal colors
         },
       }
 
-      require('mandalorian').load()
+      -- Apply the colorscheme
+      vim.cmd.colorscheme 'the-mandalorian'
     end,
   },
 
