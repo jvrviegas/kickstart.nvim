@@ -987,6 +987,17 @@ require('lazy').setup({
   },
 
   {
+    'jvrviegas/hollow-knight.nvim',
+    priority = 1000,
+    config = function()
+      require('hollow-knight').setup {
+        transparent = true,
+        background_clear = { 'float_win', 'telescope', 'neo-tree', 'notify', 'noice' },
+      }
+    end,
+  },
+
+  {
     dir = '~/Projects/Personal/neovim/the-mandalorian-nvim',
     name = 'the-mandalorian',
     priority = 1000, -- Load before other plugins
