@@ -998,8 +998,7 @@ require('lazy').setup({
   },
 
   {
-    dir = '~/Projects/Personal/neovim/the-mandalorian-nvim',
-    name = 'the-mandalorian',
+    'jvrviegas/the-mandalorian.nvim',
     priority = 1000, -- Load before other plugins
     config = function()
       require('the-mandalorian').setup {
